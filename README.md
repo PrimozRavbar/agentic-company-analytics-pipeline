@@ -75,3 +75,7 @@ Replace the current simulated profile with a richer, dynamic representation of t
 ### 3. Agentic Harness
 
 Build the orchestration layer that maintains state and context, interacts with the local LLM, issues retrieval requests, incorporates retrieved information, and iterates until sufficient information is available to answer the question.
+
+Acknowledgements
+
+This project uses Qwen3-1.7B by the Qwen team, released under the Apache 2.0 license.
