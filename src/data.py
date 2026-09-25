@@ -1,3 +1,9 @@
+TICKERS = [
+    "AAPL","MSFT","NVDA","AMZN","GOOGL","META","TSLA","BRK-B","JPM","V",
+    "UNH","XOM","MA","AVGO","PG","HD","LLY","MRK","COST","PEP",
+    "ADBE","CSCO","KO","CRM","WMT","BAC","NFLX","TMO","DIS","ABT"
+]
+
 import yfinance as yf
 import pandas as pd
 
