@@ -19,7 +19,6 @@ class RetrievedEvent(BaseModel):
     start_time: str
     end_time: str
     strength: float
-    features: dict
     summary: str
 
 
@@ -37,7 +36,6 @@ def retrieve_company_events(
             start_time=str(e.start_time),
             end_time=str(e.end_time),
             strength=e.strength,
-            features=e.features,
             summary=e.summary,
         )
         for e in retrieved
@@ -56,9 +54,12 @@ def build_retrieve_company_events_tool(event_store: EventStore):
     ) -> list[dict]:
         """Retrieve company events matching the requested criteria.
 
+        Valid event types are:
+        volatility_regime, downtrend_regime, statistical_stress.
+
         Args:
             tickers: Stock tickers to retrieve events for.
-            event_types: Types of events to retrieve.
+            event_types: Event types to retrieve.
             start_time: Earliest event date to include.
             end_time: Latest event date to include.
             reason: Explanation of why the retrieval is needed.
@@ -72,6 +73,12 @@ def build_retrieve_company_events_tool(event_store: EventStore):
         )
 
         retrieved = retrieve_company_events(event_store, request)
+
+        retrieved = sorted(
+            retrieved,
+            key=lambda event: event.strength,
+            reverse=True,
+        )[:20]
 
         return [event.model_dump() for event in retrieved]
 

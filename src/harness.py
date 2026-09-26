@@ -6,13 +6,14 @@ def build_agent(tools):
     model = TransformersModel(
         model_id="Qwen/Qwen3-1.7B",
         device_map="auto",
-        max_new_tokens=300,
+        max_new_tokens=100,
         apply_chat_template_kwargs={"enable_thinking": False},
     )
 
     return ToolCallingAgent(
         tools=tools,
         model=model,
+        max_steps=3,
     )
 
 
