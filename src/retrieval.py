@@ -1,5 +1,17 @@
+
 import pandas as pd
 from collections import defaultdict
+
+
+class EventStore:
+    def __init__(self, events):
+        self.events = events
+
+    def retrieve(self, request):
+        return retrieve_events(
+            self.events,
+            **request.model_dump()
+        )
 
 
 def retrieve_events(
