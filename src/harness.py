@@ -1,10 +1,20 @@
-# Agentic harness
-#
-# Placeholder for the agent orchestration layer.
-# The harness will eventually manage:
-# - agent state
-# - context
-# - memory
-# - retrieval/tool calls
-# - LLM interaction
-# - iterative analysis
+
+from smolagents import ToolCallingAgent, TransformersModel
+
+
+def build_agent(tools):
+    model = TransformersModel(
+        model_id="Qwen/Qwen3-1.7B",
+        device_map="auto",
+        max_new_tokens=300,
+        apply_chat_template_kwargs={"enable_thinking": False},
+    )
+
+    return ToolCallingAgent(
+        tools=tools,
+        model=model,
+    )
+
+
+def run_agent(agent, task):
+    return agent.run(task)
